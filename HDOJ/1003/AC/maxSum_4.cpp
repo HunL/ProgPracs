@@ -1,4 +1,5 @@
 /*
+http://hi.baidu.com/liuweivery1990/blog/item/c07473dd4066d555cdbf1a16.html
 贪心算法
 */
 #include<iostream>
