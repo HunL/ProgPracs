@@ -3,7 +3,7 @@
  *
  *       Filename:  sum.c
  *
- *    Description:  大数相加
+ *    Description:  大数相加。字符+48=数字
  *
  *        Version:  1.0
  *        Created:  12/10/2011 11:38:46 PM
@@ -18,7 +18,7 @@
 #include<stdio.h>
 #include<string.h>
 
-#define MAX 1000
+#define MAX 1001
 
 void add(char a[],char b[])
 {
@@ -28,7 +28,7 @@ void add(char a[],char b[])
   int j = len_b;
   int temp = 0;
   int flg = 0;
-  char sum[MAX] = " ";
+  char sum[MAX] = {' '};
 
   for(;i > 0;i--)//最后一位是a[i-1]和b[j-1]
   {
@@ -42,9 +42,9 @@ void add(char a[],char b[])
     
 //    if(temp > 10)//1+9不产生进位，SB
     if(temp >= 10)
-    {
       flg = 1;
-    }
+    else 
+      flg = 0;
     temp %= 10;
     sum[i] = temp + 48;//将a[i-1]和b[j-1]的个位保存在sum[i]
   }
@@ -58,36 +58,42 @@ void add(char a[],char b[])
   i = 0;
   while(i <= len_a)
   {
-    printf("%c",sum[i]);
+    if(sum[i] != ' ')
+      printf("%c",sum[i]);
     i++;
   }
 }
 
 int main()
 {
-  int i,n;
+  int i,k,j,T;
   char a[MAX],b[MAX];
-  while(scanf("%d",&n) != EOF)
+  while(scanf("%d",&T) != EOF)
   {
-    for(i=0;i < n;i++)
+    for(i=1;i <= T;i++)
+//坑爹啊，格式要求这么严格！最后一行输出结果后面不可以再有空行！
     {
       scanf("%s %s",a,b);
-      int len_a = strlen(a),len_b = strlen(b);
-      int k = len_a,j = len_b;
-      printf("Case %d:\n",i+1);
+      k = strlen(a);
+      j = strlen(b);
+      printf("Case %d:\n",i);
       printf("%s + %s = ",a,b);
       if(k >= j)
-      {
-       add(a,b);
+     {
+	      add(a,b);
+              printf("\n");
       }
       else
       {
-       add(b,a);
+	      add(b,a);
+              printf("\n");
+       }
+       if(i != T)
+      {
+              printf("\n");
       }
-       printf("\n\n");
     }
   }
-  
   return 0;
 }
 //int main()
