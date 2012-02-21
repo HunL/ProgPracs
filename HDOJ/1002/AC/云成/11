@@ -1,0 +1,29 @@
+scene:2.5d
+
+body_array = new Array()
+body_array[0] = rand()%5;
+body_array[1] = rand()%5;
+body_array[2] = rand()%5;
+target = 10;
+function drawTarget()
+{
+beginFill(ox000000,85);
+moveTo(0,0);
+lineTo(50,0);
+lineTo(50,50);
+lineTo(0,50);
+lineTo(0,0);
+endFill();
+}
+
+var n = 3;
+var res = 0;
+for(var i = 0;i < n;i++)
+{
+sum += body_array[i] ;
+}
+if(target % sum == 0)
+res = res + (target / sum)*3;
+else
+res = res + (target / sum + 1)*3 + 1;
+trace(res);

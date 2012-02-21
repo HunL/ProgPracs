@@ -1,0 +1,65 @@
+scene:2.5d
+
+//function attackField()
+//{
+//  beginFill(ox000000,85);
+//  moveTo(0,0);
+//  lineTo(50,0);
+//  lineTo(50,50);
+//  lineTo(0,50);
+//  lineTo(0,0);
+//  endFill();
+//}
+
+//var arr:Array=new Array(1);
+
+var row:Number=20;
+var col:Number=4;
+var body:Array=new Array(row);
+var attack:Array=new Array(row);
+for (var i=0;i<row;i++)
+{ body[i]=new Array(col);
+  attack[i]=new Array(col);
+　　for (var j=0;j<col;j++)
+　　{
+//　　body[i][j]=String(i)+String(j);
+          var randomNumber1:Number = Math.random() * 80;  
+          var randomInt1:int = Math.round(randomNumber);  
+          var randomNumber2:Number = Math.random() * 100;  
+          var randomInt2:int = Math.round(randomNumber);  
+          //var randomNumber3:Number = Math.random() * 80;  
+          //var randomInt3:int = Math.round(randomNumber);  
+          //var randomNumber4:Number = Math.random() * 80;  
+          //var randomInt4:int = Math.round(randomNumber);  
+          //trace('randomNumber: ' + randomNumber);  
+          //trace('randomInt: ' + randomInt); 
+           body[i][j]=String(randomInt1);
+           attack[i][j]=String(randomInt2);
+　　}
+}
+//trace(body);
+
+function peopleBeAttacked()
+{
+  //var n=row*col;
+  var count=0;
+  for(var i=0,var j=0;i<row;i++)
+  {
+//    for(var j=0;j<col;j++)
+//    {
+//      if((body[i][j]<50 && body[i][j]>0)&&(body[i][j+1]<50&&body[i][j+1]>0)||(body[i][j+2]<50 && body[i][j+2]>0)&&(body[i][j+3]<50&&body[i][j+3]>0))
+//      if((body[i][j]< max(attack[i][j],attack[i][i+2]) && body[i][j]> min(attack[i][j],attack[i][j+2]))&&(body[i][j+1]< max(attack[i][j+1],attack[i][j+3])&&body[i][j+1]> min(attack[i][j+1],attack[i][j+3]))||(body[i][j+2]< max(attack[i][j],attack[i][j+2]) && body[i][j+2]> min(attack[i][j],attack[i][j+2]))&&(body[i][j+3]< max(attack[i][j+1],attack[i][j+3])&&body[i][j+3]> min(attack[i][j+1],attack[i][j+3]))
+      if((body[i][j]< max(attack[i][j],attack[i][i+2])) && (body[i][j]> min(attack[i][j],attack[i][j+2])))
+      {
+        if((body[i][j+1]< max(attack[i][j+1],attack[i][j+3])) && (body[i][j+1]> min(attack[i][j+1],attack[i][j+3])))
+          count++;
+      }
+      else if((body[i][j+2]< max(attack[i][j],attack[i][j+2])) && (body[i][j+2]> min(attack[i][j],attack[i][j+2])))
+      {
+        if((body[i][j+3]< max(attack[i][j+1],attack[i][j+3])) && (body[i][j+3]> min(attack[i][j+1],attack[i][j+3])))
+          count++;
+      }
+//    }
+  }
+  trace("The number of the people be attacked is:"+count);
+}

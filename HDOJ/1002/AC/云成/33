@@ -1,0 +1,113 @@
+scene:2.5d
+
+var row:Number=20;
+var col:Number=4;
+var body:Array=new Array(row);
+var attack:Array=new Array(row);
+for (var i=0;i<row;i++)
+{ body[i]=new Array(col);
+  attack[i]=new Array(col);
+　　for (var j=0;j<col;j++)
+　　{
+          var randomNumber1:Number = Math.random() * 80;  
+          var randomInt1:int = Math.round(randomNumber);  
+          var randomNumber2:Number = Math.random() * 100;  
+          var randomInt2:int = Math.round(randomNumber);  
+          body[i][j]=String(randomInt1);
+          attack[i][j]=String(randomInt2);
+　　}
+}
+
+var first,last;
+function partition(first:int,last:int):int
+{
+  var mid;
+  var pivot1=body[first][0];
+//  var pivot2=body[1][first];
+//  var pivot3=body[2][first];
+//  var pivot4=body[3][first];
+//  var pivot5=attack[0][first];
+//  var pivot6=attack[1][first];
+//  var pivot7=attack[2][first];
+//  var pivot8=attack[3][first];
+  while(first<last)
+  {
+    while(first<last && body[last][0]>=pivot1)
+      last--;
+    if(first<last)
+      body[first++][0]=body[last][0];
+    while(first<last && body[first][0]<=pivot1)
+      first++;
+    if(first<last)
+      body[last--][0]=body[first][0];
+  }
+  body[first][0]=pivot1;
+  mid=first;
+  return mid;
+}
+
+function partition_1(first:int,last:int):int
+{
+  var mid;
+  var pivot5=attack[first][0];
+  while(first<last)
+  {
+    while(first<last && attack[last][0]>=pivot5)
+      last--;
+    if(first<last)
+      attack[first++][0]=attack[last][0];
+    while(first<last && attack[first][0]<=pivot5)
+      first++;
+    if(first<last)
+      attack[last--][0]=attack[first][0];
+  }
+  attack[first][0]=pivot5;
+  mid=first;
+  return mid;
+}
+
+function quicksort(first:int,last:int)
+{
+  var mid;
+  if(first<last)
+  {
+    mid=partition(first,last);
+    quicksort(first,mid-1);
+    quicksort(mid+1,last);
+  }
+}
+
+function quicksort_1(first:int,last:int)
+{
+  var mid;
+  if(first<last)
+  {
+    mid=partition_1(first,last);
+    quicksort(first,mid-1);
+    quicksort(mid+1,last);
+  }
+}
+
+function peopleBeAttacked()
+{
+  var count=0;
+  quicksort(0,row-1);
+  quicksort_1(0,row-1);
+  for(var i=0,var j=0;i<row;i++)
+  {
+    if(body[i][0]<= attack[row-1][0] && body[i][0] >= attack[0][0])
+    {
+         if((body[i][j]< max(attack[i][j],attack[i][i+2])) && (body[i][j]> min(attack[i][j],attack[i][j+2])))
+        {
+          if((body[i][j+1]< max(attack[i][j+1],attack[i][j+3])) && (body[i][j+1]> min(attack[i][j+1],attack[i][j+3])))
+            count++;
+        }
+        else if((body[i][j+2]< max(attack[i][j],attack[i][j+2])) && (body[i][j+2]> min(attack[i][j],attack[i][j+2])))
+        {
+          if((body[i][j+3]< max(attack[i][j+1],attack[i][j+3])) && (body[i][j+3]> min(attack[i][j+1],attack[i][j+3])))
+            count++;
+        }
+    }
+  }
+  trace("The number of the people be attacked is:"+count);
+}
