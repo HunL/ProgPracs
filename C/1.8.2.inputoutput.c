@@ -5,7 +5,7 @@
  *      Author: j
  */
 
-//eclipse cdt怎么调出控制台进行输入
+//eclipse cdt怎么调出控制台进行输入->用命令行gcc
 
 #include<stdio.h>
 
@@ -18,18 +18,22 @@ int main(void)
 	line = 0;
 	at_beginning = 1;
 
+	printf("please input : ");
 	while((ch = getchar()) != EOF)
 	{
 		if(at_beginning == 1)
 		{
 			at_beginning = 0;
 			line+=1;
-			printf("%d: ", line);
+			printf("line %d: ", line);
 		}
 
 		putchar(ch);
 		if(ch == '\n')
+		{
 			at_beginning = 1;
+			printf("please input : ");
+		}
 	}
 
 	return 0;
