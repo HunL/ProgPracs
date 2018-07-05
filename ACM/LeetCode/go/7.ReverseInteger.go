@@ -1,9 +1,13 @@
 package main
 
-import . "fmt"
+import (
+    . "fmt"
+    "math"
+)
 
 func main() {
-    res := reverse(-120)
+    //res := reverse(-120)
+    res := reverse(1563847412)
     Println("res: ", res)
 }
 
@@ -19,17 +23,18 @@ func reverse(x int) int {
 }
 
 func helper(x int) int {
-    Println("begin x: ", x)
     s := 0 
     r := 0
     for x > 0 {
         s = x % 10
-        Println("x: ", x)
-        Println("s: ", s)
         r = r * 10 + s
-        Println("r: ", r)
         x = x / 10 
     }
- 
+
+    maxInt32 := math.Pow(2, 31)
+    if float64(r) > maxInt32-1 {
+        r = 0
+    }
+
     return r
 }
