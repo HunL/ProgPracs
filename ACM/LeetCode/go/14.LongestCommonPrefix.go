@@ -39,7 +39,7 @@ Loop:
 			if strings.HasPrefix(v, commonPrefix) == false {
 				Println("doesn't has prefix v: ", v)
 				Println("commonPrefix: ", commonPrefix)
-				commonPrefix = commonPrefix[0 : len(commonPrefix)-1]
+				commonPrefix = commonPrefix[:len(commonPrefix)-1]
 				break Loop
 			}
 		}
