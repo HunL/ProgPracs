@@ -17,7 +17,14 @@ map<string, int> phone_book = {
 
 int get_number(const string& s) {
     // return phone_book.at(s);
-    return phone_book[s];
+    // return phone_book[s];
+    map<string, int>::iterator key = phone_book.find(s);
+    if (key!=phone_book.end())
+    {
+        cout << "key: " << key->first << key->second << endl;
+        return key->second;
+    }
+    return 0;
 }
 
 int main() {
