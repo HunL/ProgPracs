@@ -14,6 +14,11 @@ var i = map[int]int{
 	3: 33,
 }
 
+var s = map[int][]int{
+	1: {1, 2, 3},
+	2: {2, 3, 4},
+}
+
 func main() {
 	Println("bool test ====================")
 	Println("m[1]: ", m[1])
@@ -23,4 +28,8 @@ func main() {
 	Println("i[1]: ", i[1])
 	Println("i[2]: ", i[2])
 	Println("i[4]: ", i[4])
+	Println("array test ====================")
+	Println("s[1]: ", s[1])
+	Println("s[2]: ", s[2])
+	Println("s[4]: ", s[4])
 }
