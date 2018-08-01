@@ -16,7 +16,7 @@ func main() {
 	Println(tm1)
 	Println(tm1.Unix())
 
-	tm2 := tm1.AddDate(0, 0, 1)
+	tm2 := tm1.AddDate(0, 1, 0)
 	Println(tm2)
 	Println(tm2.Unix())
 
