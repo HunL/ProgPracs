@@ -19,4 +19,7 @@ func main() {
 	tm2 := tm1.AddDate(0, 0, 1)
 	Println(tm2)
 	Println(tm2.Unix())
+
+	zeroTimeUnix := time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location()).Unix()
+	Println(zeroTimeUnix)
 }
