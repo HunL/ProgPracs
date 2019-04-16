@@ -2,36 +2,39 @@ package main
 
 import (
 	. "fmt"
-	// "strings"
 )
 
 func main() {
-	arr := []int{-2,4,-1,1}
-	// arr := []int{-2,4}
-	Println("arr: ", arr)
-	target := 1
-	Println("target: ", target)
-	sum := closestSum(arr)
+	arr := []int{-3,-2,-5,3,-4}
+	target := -1
+	sum := closestSum(arr, target)
 	Println("sum: ", sum)
 }
 
-func closestSum(arr []int) int {
-	Println("arr: ", arr)
+func closestSum(arr []int, target int) int {
 	if len(arr) < 3 {
 		return 0
 	}
+	flag := arr[0] + arr[1] + arr[2]
+	gap := toNonNegative(flag - target)
 	for i:=0;i<len(arr);i++{
-		// Print("arr[i]: ",arr[i],"\t")
 		for j:=i+1;j<len(arr);j++{
-			// Print("arr[j]: ",arr[j],"\t")
 			for k:=j+1;k<len(arr);k++{
-				// Print("arr[k]: ",arr[k],"\t")
-				Print("i,j,k: ",arr[i],arr[j],arr[k],"\t")
-				Println()		
+				realtmp := arr[i] + arr[j] + arr[k]
+				tmp := toNonNegative(realtmp - target)
+				if (tmp < gap) {
+					gap = tmp
+					flag = realtmp
+				}
 			}	
-		}
-		
+		}		
 	}
-	Println()
-	return 1
+	return flag
+}
+
+func toNonNegative(x int) int {
+	if (x < 0) {
+		return -x
+	}
+	return x
 }
