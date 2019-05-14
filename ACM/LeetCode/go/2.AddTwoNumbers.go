@@ -13,9 +13,11 @@ func main() {
     // test(12)
     // showNodes(test1)
 
-    test1 := getListNode1(123)
+    // num := reverse_num(123, 0)
+    // Print("reverse num: ", num)
+    test1 := getListNode1(173)
     showNodes(test1)
-
+    
     test2 := getListNode1(345)
     showNodes(test2)
 
@@ -61,7 +63,7 @@ func getListNode1(num int) *ListNode {
     }
     head.Val = num % 10
     num = num / 10
-    // num = reverse_num(num)
+    num = reverse_num(num, 0)
     for (num != 0) {
         Print("\nnum: ", num, "\t")
         var node = new(ListNode)
@@ -75,17 +77,32 @@ func getListNode1(num int) *ListNode {
     return head
 }
 
-func reverse_num(num int) int {
+func reverse_num(num int, result int) int {
     if (num == 0) {
-        return num
+        return result
     }
     
-    for (num != 0) {
-        // a := num % 10
-        // b := num / 10
+    a := num % 10
+    b := num / 10
+    result = result * 10 + a
+    return reverse_num(b, result)
+}
 
+func reverse_node(node *ListNode) *ListNode {
+    // if (node == nil) {
+    //     return node
+    // }
+    
+    // a := num % 10
+    // b := num / 10
+    // result = result * 10 + a
+    // return reverse_num(b, result)
+    cur := node
+    var pre *ListNode = nil
+    for cur != nil {
+        pre, cur, cur.Next = cur, cur.Next, pre
     }
-    return 0
+    return pre
 }
 
 func showNodes(p *ListNode) {
@@ -101,9 +118,11 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     l3.Val = l1.Val+l2.Val
     l1 = l1.Next
     l2 = l2.Next
+    l1 = reverse_node(l1)
+    l2 = reverse_node(l2)
     
     for (l1 != nil) {
-        Print("add: ", l1.Val, "\t", l2.Val)
+        Print("\nadd: ", l1.Val, "\t", l2.Val)
         var tail = new(ListNode)
         tail.Val = l1.Val+l2.Val
         l1 = l1.Next
