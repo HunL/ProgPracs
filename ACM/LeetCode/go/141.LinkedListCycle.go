@@ -21,16 +21,29 @@ func main() {
 	head.Next = node1
 	node1.Next = node2
 	node2.Next = node3
-// 	node3.Next = node2
- 	node3.Next = nil
+	node3.Next = node2
+ 	// node3.Next = nil
 	has := hasCycle(head)
 	Print("res: ", has)
 }
 
 func hasCycle(head *ListNode) bool {
 	cur := head
-	for cur != nil {
+	var arr []*ListNode
+	flag := false
+	for cur != nil  {
 		Print("cur: ", cur.Val, "\n")
+		for k,v := range arr {
+			Print("arr i: ", k, v, "\n")
+			// Print("arr i: ", i.Val, "\n")
+			if (v == cur) {
+				flag = true
+				return true
+			}
+		}
+		if (flag == false) {
+			arr = append(arr, cur)
+		}
 		cur = cur.Next
 	}
 	return false
