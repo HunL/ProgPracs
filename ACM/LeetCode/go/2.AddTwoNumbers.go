@@ -88,6 +88,7 @@ func reverse_num(num int, result int) int {
     return reverse_num(b, result)
 }
 
+// @todo 画画写写加深理解
 func reverse_node(node *ListNode) *ListNode {
     // if (node == nil) {
     //     return node
@@ -120,11 +121,21 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     l2 = l2.Next
     l1 = reverse_node(l1)
     l2 = reverse_node(l2)
+    remainTmp := 0
     
-    for (l1 != nil) {
+    for (l1 != nil && remainTmp != 0) {
         Print("\nadd: ", l1.Val, "\t", l2.Val)
         var tail = new(ListNode)
-        tail.Val = l1.Val+l2.Val
+        valTmp := l1.Val+l2.Val+remainTmp
+
+        
+        if (valTmp >= 10) {
+            tail.Val = valTmp % 10
+            remainTmp = valTmp / 10
+        } else {
+            tail.Val = valTmp
+        }    
+        
         l1 = l1.Next
         l2 = l2.Next
         // 这个地方想了一个小时！！！大爷的
