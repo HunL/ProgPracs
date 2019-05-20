@@ -15,10 +15,16 @@ func main() {
 
     // num := reverse_num(123, 0)
     // Print("reverse num: ", num)
-    test1 := getListNode1(173)
+
+
+    // test1 := getListNode1(1723)
+    // test1 := getListNode1(173)
+    test1 := getListNode1(1763)
     showNodes(test1)
     
-    test2 := getListNode1(345)
+    // test2 := getListNode1(3435)
+    // test2 := getListNode1(345)
+    test2 := getListNode1(3455)
     showNodes(test2)
 
     test3 := addTwoNumbers(test1, test2)
@@ -114,20 +120,22 @@ func showNodes(p *ListNode) {
     Println()
 }
 
+// todo 需先写好几种标准测试用例
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     var l3 = new(ListNode)
     l3.Val = l1.Val+l2.Val
     l1 = l1.Next
     l2 = l2.Next
-    l1 = reverse_node(l1)
-    l2 = reverse_node(l2)
+    // l1 = reverse_node(l1)
+    // l2 = reverse_node(l2)
     remainTmp := 0
     
-    for (l1 != nil && remainTmp != 0) {
-        Print("\nadd: ", l1.Val, "\t", l2.Val)
+    // for (l1 != nil && remainTmp != 0) {
+    for (l1 != nil) {
+        Print("\nadd: ", l1.Val, "\t", l2.Val, "\t", remainTmp)
         var tail = new(ListNode)
         valTmp := l1.Val+l2.Val+remainTmp
-
+        Print("\nadd: ", valTmp)
         
         if (valTmp >= 10) {
             tail.Val = valTmp % 10
@@ -145,5 +153,6 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         
         Println()
     }
-    return l3
+    l3.Next = reverse_node(l3.Next)
+    return reverse_node(l3)
 }
