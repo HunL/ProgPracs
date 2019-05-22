@@ -207,5 +207,6 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     // }
 
     l3.Next = reverse_node(l3.Next)
-    return reverse_node(l3)
+    // return reverse_node(l3)
+    return l3
 }
