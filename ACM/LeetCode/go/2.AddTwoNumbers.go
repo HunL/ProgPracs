@@ -19,12 +19,18 @@ func main() {
 
     // test1 := getListNode1(1723)
     // test1 := getListNode1(173)
-    test1 := getListNode1(1763)
+    // 第一位进位的处理
+    // 最后一位进位的处理
+    // 第2个数比第1个数长
+    // 0的处理
+    test1 := getListNode1(768)
+    // test1 := getListNode1(0)
     showNodes(test1)
     
     // test2 := getListNode1(3435)
     // test2 := getListNode1(345)
-    test2 := getListNode1(3455)
+    // test2 := getListNode1(6455)
+    test2 := getListNode1(0)
     showNodes(test2)
 
     test3 := addTwoNumbers(test1, test2)
@@ -120,21 +126,41 @@ func showNodes(p *ListNode) {
     Println()
 }
 
-// todo 需先写好几种标准测试用例
+// 先写好所有标准测试用例
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
     var l3 = new(ListNode)
-    l3.Val = l1.Val+l2.Val
-    l1 = l1.Next
-    l2 = l2.Next
+    Print("\nfirst 1 2: ", l1.Val, "\t", l2.Val, "\n")
+    l3.Val = (l1.Val+l2.Val) % 10
     // l1 = reverse_node(l1)
     // l2 = reverse_node(l2)
-    remainTmp := 0
+    remainTmp := (l1.Val+l2.Val) / 10
+    l1 = l1.Next
+    l2 = l2.Next
+    var valTmp int
     
     // for (l1 != nil && remainTmp != 0) {
-    for (l1 != nil) {
-        Print("\nadd: ", l1.Val, "\t", l2.Val, "\t", remainTmp)
+    // for (l1 != nil) || (remainTmp != 0) {
+    for (l1 != nil) || (l2 != nil) || (remainTmp != 0)  {
+        
         var tail = new(ListNode)
-        valTmp := l1.Val+l2.Val+remainTmp
+        if (l1 != nil) {
+            if (l2 != nil) {
+                valTmp = l1.Val+l2.Val+remainTmp
+                Print("\nadd 1 2: ", l1.Val, "\t", l2.Val, "\t", remainTmp)
+            } else {
+                valTmp = l1.Val+remainTmp
+                Print("\nadd 1: ", l1.Val, "\t", remainTmp)
+            }
+        } else {
+            if (l2 != nil) {
+                valTmp = l2.Val+remainTmp
+                Print("\nadd 2: ", l2.Val, "\t", remainTmp)
+            } else {
+                valTmp = remainTmp
+                Print("\nadd: ", remainTmp)
+            }
+        }
+        
         Print("\nadd: ", valTmp)
         
         if (valTmp >= 10) {
@@ -142,10 +168,16 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
             remainTmp = valTmp / 10
         } else {
             tail.Val = valTmp
+            remainTmp = valTmp / 10
         }    
         
-        l1 = l1.Next
-        l2 = l2.Next
+        if (l1 != nil) {
+            l1 = l1.Next   
+        }
+        if (l2 != nil) {
+            l2 = l2.Next
+        }
+
         // 这个地方想了一个小时！！！大爷的
         tail.Next = l3.Next
         l3.Next = tail
@@ -153,6 +185,27 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
         
         Println()
     }
+
+    // if (remainTmp != 0) {
+    //     Print("\nadd: ", remainTmp)
+    //     var tail = new(ListNode)
+    //     valTmp := remainTmp
+    //     Print("\nadd: ", valTmp)
+        
+    //     if (valTmp >= 10) {
+    //         tail.Val = valTmp % 10
+    //         remainTmp = valTmp / 10
+    //     } else {
+    //         tail.Val = valTmp
+    //     }    
+        
+    //     tail.Next = l3.Next
+    //     l3.Next = tail
+    //     // l3 = l3.Next
+        
+    //     Println()
+    // }
+
     l3.Next = reverse_node(l3.Next)
     return reverse_node(l3)
 }
